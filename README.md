@@ -1,12 +1,10 @@
-RN学习
-
 #### 创建项目
 
 npm install -g create-react-native-app
 
 create-react-native-app AwesomeProject
 
-以上项目你无法嵌入自己的Native代码，也就是所谓的唇Native项目，这些代码可以运行在一个叫Expo(https://expo.io/)的应用中
+以上项目你无法嵌入自己的Native代码，也就是所谓的纯Native项目，这些代码可以运行在一个叫Expo(https://expo.io/)的应用中
 
  如果需要加入自己的Native代码，需要在工程目录下执行下面命令
 

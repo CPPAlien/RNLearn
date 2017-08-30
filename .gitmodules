@@ -1,0 +1,3 @@
+[submodule "rn"]
+	path = rn
+	url = https://gitlab.qunhequnhe.com/app/rn-pack.git
