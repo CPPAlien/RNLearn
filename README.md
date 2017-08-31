@@ -1,4 +1,4 @@
-#### 创建项目
+### 创建项目
 
 npm install -g create-react-native-app
 
@@ -30,7 +30,7 @@ Shift + Command + H  Home键
 
 
 
-#### 语法
+### 语法
 
 一个js为一个module，多个module可以组成bundle
 
@@ -97,7 +97,7 @@ BigButton.android.js
 
 
 
-#### JS代码
+### JS代码
 
 ```
 AppRegistry.registerComponent('FirstApp', () => App);
@@ -116,11 +116,9 @@ protected String getMainComponentName() {
 
 
 
+### Native代码
 
-
-#### Native代码
-
-##### Native Module
+#### Native Module
 
 继承 ReactContextBaseJavaModule
 
@@ -141,7 +139,25 @@ ReadableArray -> Array
 
 
 
-##### 注册Module
+继承后，需要返回getName，作为改Module在Js中的名字
+
+```
+@Override
+public String getName() {
+	return "TestModule";
+}
+```
+
+
+
+```
+UiThreadUtil.runOnUiThread  // 可以在ReactContextBaseJavaModule中使用此，来在Ui线程中运行带脉
+getReactApplicationContext()  // 来获得Context
+```
+
+
+
+#### 注册
 
 把Module加入到 ReactPackage中
 
@@ -156,6 +172,27 @@ protected List<ReactPackage> getPackages() {
 	);
 }
 ```
+
+
+
+#### 使用
+
+在Js中封装该Module
+
+```
+'use strict'
+
+import { NativeModules } from 'react-native';
+module.exports = NativeModules.TestModule;  // 注意名字与Java中 getName 名字返回一样
+```
+
+然后就可以通过以下方式使用
+
+```
+import PTest from './bridge/android/TestModule'
+```
+
+
 
 
 
