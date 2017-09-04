@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RNLearn.iml" filepath="$PROJECT_DIR$/RNLearn.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file:///Volumes/Develop/AndroidProjects/RNLearn/RNLearn.iml" filepath="/Volumes/Develop/AndroidProjects/RNLearn/RNLearn.iml" />
+      <module fileurl="file:///Volumes/Data/RNLearn/RNLearn.iml" filepath="/Volumes/Data/RNLearn/RNLearn.iml" />
+      <module fileurl="file:///Volumes/Develop/AndroidProjects/RNLearn/app/app.iml" filepath="/Volumes/Develop/AndroidProjects/RNLearn/app/app.iml" />
+      <module fileurl="file:///Volumes/Data/RNLearn/app/app.iml" filepath="/Volumes/Data/RNLearn/app/app.iml" />
     </modules>
   </component>
 </project>

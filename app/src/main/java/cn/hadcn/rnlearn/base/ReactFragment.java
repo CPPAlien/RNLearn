@@ -1,4 +1,4 @@
-package cn.hadcn.rnlearn.fragment;
+package cn.hadcn.rnlearn.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import cn.hadcn.rnlearn.MainApplication;
 
@@ -44,5 +45,14 @@ public abstract class ReactFragment extends Fragment {
                 getMainComponentName(),
                 null
         );
+    }
+
+    protected void sendEvent(String eventName, Object data) {
+        if (mReactInstanceManager != null && mReactInstanceManager.getCurrentReactContext() !=
+                null) {
+            mReactInstanceManager.getCurrentReactContext()
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(eventName, data);
+        }
     }
 }

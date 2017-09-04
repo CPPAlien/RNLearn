@@ -208,3 +208,24 @@ react-native bundle --platform android --entry-file ./index.android.js  --bundle
 react-native start // 运行RN服务器
 ```
 
+
+
+#### 数据传递
+
+Native -> RN
+
+```
+reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)  
+                .emit(eventName, params);  
+```
+
+rn -> native   ReadableMap/ReadableArray
+
+native -> rn    WritableMap/WritableArray
+
+
+
+```
+Native使用Callback/Promise回调RN
+```
+

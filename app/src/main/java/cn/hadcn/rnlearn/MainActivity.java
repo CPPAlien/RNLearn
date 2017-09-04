@@ -1,10 +1,10 @@
 package cn.hadcn.rnlearn;
 
-import com.facebook.react.ReactActivity;
-
 import javax.annotation.Nullable;
 
-public class MainActivity extends ReactActivity {
+import cn.hadcn.rnlearn.base.BaseReactActivity;
+
+public class MainActivity extends BaseReactActivity {
     @Nullable
     @Override
     protected String getMainComponentName() {

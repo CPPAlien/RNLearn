@@ -1,17 +1,19 @@
-package cn.hadcn.rnlearn.fragment;
+package cn.hadcn.rnlearn.base;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import cn.hadcn.rnlearn.MainApplication;
 import cn.hadcn.rnlearn.R;
 
-public class FragmentActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public abstract class BaseReactFragmentActivity<F extends ReactFragment> extends
+        AppCompatActivity implements DefaultHardwareBackBtnHandler {
     private ReactInstanceManager mReactInstanceManager;
 
     @Override
@@ -24,9 +26,21 @@ public class FragmentActivity extends AppCompatActivity implements DefaultHardwa
         mReactInstanceManager =
                 ((MainApplication) getApplication()).getReactNativeHost().getReactInstanceManager();
 
-        Fragment viewFragment = new HelloFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.container, viewFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, returnReactFragment())
+                .commit();
+        //// TODO: 04/09/2017 只在调试时加入该段代码
+        toolbar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                if (mReactInstanceManager != null) {
+                    mReactInstanceManager.showDevOptionsDialog();
+                }
+                return false;
+            }
+        });
     }
+
+    protected abstract F returnReactFragment();
 
     @Override
     public void invokeDefaultOnBackPressed() {
@@ -64,6 +78,15 @@ public class FragmentActivity extends AppCompatActivity implements DefaultHardwa
         super.onDestroy();
         if (mReactInstanceManager != null) {
             mReactInstanceManager.onHostDestroy(this);
+        }
+    }
+
+    protected void sendEvent(String eventName, Object data) {
+        if (mReactInstanceManager != null && mReactInstanceManager.getCurrentReactContext() !=
+                null) {
+            mReactInstanceManager.getCurrentReactContext()
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(eventName, data);
         }
     }
 }
